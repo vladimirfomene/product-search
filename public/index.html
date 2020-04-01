@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+		<head>
+			<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+			<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" rel="stylesheet" type="text/css" />
+			<link href="https://cdn.muicss.com/mui-0.9.20/css/mui.min.css" rel="stylesheet" type="text/css" />
+			<link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,700|Open+Sans" rel="stylesheet">
+			<link href="./css/style.css" rel="stylesheet" type="text/css"/>
+		</head>
+		<body> 
+			<div class="container" id="app">
+					<div class="row">
+						  <div class="col-md-6 col-md-offset-3">
+						     <h1>Search for your Products</h1>
+						  </div>
+					</div>
+					<div class="row">
+						  <div class="col-md-5 col-md-offset-3">
+						          <div class="form-group has-feedback">
+						              <label for="search" class="sr-only">Search</label>
+						              <input type="text" class="form-control" name="search" id="search" placeholder="search" @keyup.enter="search" v-model.trim="query">
+						              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+						          </div>
+						  </div>
+					</div>
+					<div class="row">
+						  <div class="col-md-3" v-for="result in results">
+						      <div class="panel panel-default">   
+						          <div class="panel-heading" >
+						                  <!-- display the Product name and branda_name  -->
+						              <div class="search-result" style="height: 150px; height: 150px">
+						               <span v-html="result.highlight.name[0]"></span>
+						                <br>Price: {{ result._source.price}} {{result._source.currency}}</br>                  
+						            <a :href="result._source.clickout_url"> Check_Out</a>            
+						          </div> 
+						          </div>
+						          <div class="panel-body">
+						             <!-- display the ProductImage  -->
+						               <img :src="result._source.image_url_large"  width="200px">
+						          </div>
+						      </div>
+						  </div>
+					</div>
+			</div>
+			<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+			<script src="https://cdn.muicss.com/mui-0.9.28/js/mui.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+			<script src="./js/app.js" type="text/javascript"></script>
+		</body>
+</html>
